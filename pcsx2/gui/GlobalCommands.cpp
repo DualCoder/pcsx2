@@ -184,7 +184,7 @@ namespace Implementations
 			case AspectRatio_16_9:		art = AspectRatio_Stretch; arts = L"AspectRatio_Stretch";break;
 		}
 
-		Console.WriteLn(L"(GSwindow) Aspect ratio: %s.", arts.c_str());
+		Console.WriteLn(L"(GSwindow) Aspect ratio: %s.", WX_STR(arts));
 		UpdateImagePosition();
 	}
 
@@ -334,7 +334,7 @@ namespace Implementations
 			if( !!part2 )
 				name += L"_" + part2;
 
-			gsText.Printf( L"%s.%d.gs", name.c_str(), StatesC );
+			gsText.Printf( L"%s.%d.gs", WX_STR(name), StatesC );
 			Text = Path::Combine( g_Conf->Folders.Savestates, gsText );
 		}
 		else
@@ -545,7 +545,7 @@ void AcceleratorDictionary::Map( const KeyAcceleratorCode& _acode, const char *s
 			//ini file contains alternative parsable key combination for current 'searchfor'.
 			acode = codeParser;
 			Console.WriteLn(Color_StrongGreen, L"Overriding '%s': assigning %s (instead of %s)",
-				fromUTF8( searchfor ).c_str(), acode.ToString().c_str(), _acode.ToString().c_str());
+				WX_STR(fromUTF8( searchfor )), WX_STR(acode.ToString()), WX_STR(_acode.ToString()));
 		}
 	}
 	// End of overrides section
@@ -558,7 +558,7 @@ void AcceleratorDictionary::Map( const KeyAcceleratorCode& _acode, const char *s
 		Console.Warning(
 			L"Kbd Accelerator '%s' is mapped multiple times.\n"
 			L"\t'Command %s' is being replaced by '%s'",
-			acode.ToString().c_str(), fromUTF8( result->Id ).c_str(), fromUTF8( searchfor ).c_str()
+			WX_STR(acode.ToString()), WX_STR(fromUTF8( result->Id )), WX_STR(fromUTF8( searchfor ))
 		);
 	}
 
@@ -567,7 +567,7 @@ void AcceleratorDictionary::Map( const KeyAcceleratorCode& _acode, const char *s
 	if( result == NULL )
 	{
 		Console.Warning( L"Kbd Accelerator '%s' is mapped to unknown command '%s'",
-			acode.ToString().c_str(), fromUTF8( searchfor ).c_str()
+			WX_STR(acode.ToString()), WX_STR(fromUTF8( searchfor ))
 		);
 	}
 	else
