@@ -44,6 +44,7 @@ PipeRedirectionBase::~PipeRedirectionBase() throw() {}
 //
 void pxLogConsole::DoLog( wxLogLevel level, const wxChar *szString, time_t t )
 {
+	wxString wstr(szString);
 	switch ( level )
 	{
 		case wxLOG_Trace:
@@ -70,15 +71,15 @@ void pxLogConsole::DoLog( wxLogLevel level, const wxChar *szString, time_t t )
 			// fallthrough!
 
 		case wxLOG_Message:
-			Console.WriteLn( L"[wx] %s", szString );
+			Console.WriteLn( L"[wx] %s", WX_WSTR(wstr) );
 		break;
 
 		case wxLOG_Error:
-			Console.Error( L"[wx] %s", szString );
+			Console.Error( L"[wx] %s", WX_WSTR(wstr) );
 		break;
 
 		case wxLOG_Warning:
-			Console.Warning( L"[wx] %s", szString );
+			Console.Warning( L"[wx] %s", WX_WSTR(wstr) );
 		break;
 	}
 }

@@ -534,28 +534,28 @@ void GSFrame::OnUpdateTitle( wxTimerEvent& evt )
 	char gsDest[128];
 	GSgetTitleInfo2( gsDest, sizeof(gsDest) );
 
-	const wxChar* limiterStr = L"None";
+	const char* limiterStr = "None";
 
 	if( g_Conf->EmuOptions.GS.FrameLimitEnable )
 	{
 		switch( g_LimiterMode )
 		{
-			case Limit_Nominal:	limiterStr = L"Normal"; break;
-			case Limit_Turbo:	limiterStr = L"Turbo"; break;
-			case Limit_Slomo:	limiterStr = L"Slomo"; break;
+			case Limit_Nominal:	limiterStr = "Normal"; break;
+			case Limit_Turbo:	limiterStr = "Turbo"; break;
+			case Limit_Slomo:	limiterStr = "Slomo"; break;
 		}
 	}
 
-	FastFormatUnicode cpuUsage;
+	FastFormatAscii cpuUsage;
 	if (m_CpuUsage.IsImplemented()) {
 		m_CpuUsage.UpdateStats();
 		if (THREAD_VU1) { // Display VU thread's usage
-			cpuUsage.Write(L" | EE: %3d%% | GS: %3d%% | VU: %3d%% | UI: %3d%%",
+			cpuUsage.Write(" | EE: %3d%% | GS: %3d%% | VU: %3d%% | UI: %3d%%",
 				m_CpuUsage.GetEEcorePct(),	m_CpuUsage.GetGsPct(),
 				m_CpuUsage.GetVUPct(),		m_CpuUsage.GetGuiPct());
 		}
 		else {
-			cpuUsage.Write(L" | EE: %3d%% | GS: %3d%% | UI: %3d%%",
+			cpuUsage.Write(" | EE: %3d%% | GS: %3d%% | UI: %3d%%",
 				m_CpuUsage.GetEEcorePct(),	m_CpuUsage.GetGsPct(),
 				m_CpuUsage.GetGuiPct());
 		}
@@ -565,8 +565,8 @@ void GSFrame::OnUpdateTitle( wxTimerEvent& evt )
 
 	SetTitle( pxsFmt( L"%s | %s (%s) | Limiter: %s | fps: %6.02f%s | State %d",
 		WX_STR(fromUTF8(gsDest)),
-		(smode2 & 1) ? L"Interlaced" : L"Progressive",
-		(smode2 & 2) ? L"frame" : L"field",
+		(smode2 & 1) ? "Interlaced" : "Progressive",
+		(smode2 & 2) ? "frame" : "field",
 		limiterStr, fps, cpuUsage.c_str(), States_GetCurrentSlot() )
 	);
 

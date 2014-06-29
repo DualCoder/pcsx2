@@ -150,7 +150,7 @@ void* VirtualMemoryReserve::Reserve( size_t size, uptr base, uptr upper_bounds )
 
 	if (!m_baseptr) return NULL;
 
-	FastFormatUnicode mbkb;
+	FastFormatAscii mbkb;
 	uint mbytes = reserved_bytes / _1mb;
 	if (mbytes)
 		mbkb.Write( "[%umb]", mbytes );

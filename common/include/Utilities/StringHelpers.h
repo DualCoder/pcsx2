@@ -23,9 +23,27 @@
 
 // Stupid wx3.0 doesn't support c_str for vararg function
 #if wxMAJOR_VERSION >= 3
+
 	#define WX_STR(str) (static_cast<const char*>(str.c_str()))
+#ifdef __LINUX__
+	// Default to UTF8
+	#define WX_WSTR(str) (static_cast<const char*>(str.c_str()))
 #else
+	// Default to UTF16...
+	#define WX_WSTR(str) (static_cast<const wchar_t*>(str.wc_str()))
+#endif
+
+#else
+
 	#define WX_STR(str) (str.c_str())
+#ifdef __LINUX__
+	// Default to UTF8
+	#define WX_WSTR(str) (str.c_str())
+#else
+	// Default to UTF16...
+	#define WX_WSTR(str) (str.wc_str())
+#endif
+
 #endif
 
 // --------------------------------------------------------------------------------------
@@ -229,7 +247,8 @@ extern bool pxParseAssignmentString( const wxString& src, wxString& ldest, wxStr
 #define pxsFmt	FastFormatUnicode().Write
 #define pxsFmtV	FastFormatUnicode().WriteV
 
-#define pxsPtr(ptr)	pxsFmt("0x%08X", (ptr)).c_str()
+//#define pxsPtr(ptr)	pxsFmt("0x%08X", (ptr)).c_str()
+#define pxsPtr(ptr)	FastFormatAscii().Write("0x%08X", (ptr)).c_str()
 
 extern wxString& operator+=(wxString& str1, const FastFormatUnicode& str2);
 extern wxString operator+(const wxString& str1, const FastFormatUnicode& str2);

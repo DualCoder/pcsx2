@@ -50,17 +50,20 @@ wxString DiagnosticOrigin::ToString( const wxChar* msg ) const
 	FastFormatUnicode message;
 
 	message.Write( L"%s(%d) : assertion failed:\n", srcfile, line );
+	// Convert to wxString
+	wxString condition_str(condition);
+	wxString msg_str(msg);
 
 	if( function != NULL )
-		message.Write( "    Function:  %S\n", function );
+		message.Write( "    Function:  %s\n", function );
 
 		message.Write(L"    Thread:    %s\n", WX_STR(Threading::pxGetCurrentThreadName()) );
 
 	if( condition != NULL )
-		message.Write(L"    Condition: %S\n", condition);
+		message.Write(L"    Condition: %s\n", WX_STR(condition_str));
 
 	if( msg != NULL )
-		message.Write(L"    Message:   %S\n", msg);
+		message.Write(L"    Message:   %s\n", WX_STR(msg_str));
 
 	return message;
 }

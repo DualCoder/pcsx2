@@ -116,7 +116,11 @@ static void LoadBiosVersion( pxInputStream& fp, u32& version, wxString& descript
 			char vermaj[3] = { romver[0], romver[1], 0 };
 			char vermin[3] = { romver[2], romver[3], 0 };
 
+#if wxMAJOR_VERSION >= 3
+			FastFormatAscii result;
+#else
 			FastFormatUnicode result;
+#endif
 			result.Write( "%-7s v%s.%s(%c%c/%c%c/%c%c%c%c)  %s",
 				zone,
 				vermaj, vermin,

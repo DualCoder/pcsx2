@@ -57,8 +57,11 @@ void BaseMcdListView::LoadSaveColumns( IniInterface& ini )
 	{
 		const ListViewColumnInfo& cinfo = GetDefaultColumnInfo(col);
 		label.Clear();
-		label.Write( L"ColumnWidth_%s", cinfo.name );
+		wxString cname(cinfo.name);
+		label.Write( L"ColumnWidth_%s", WX_WSTR(cname) );
+
 		int width = GetColumnWidth(col);
+
 		ini.Entry( label, width, cinfo.width );
 		
 		if (ini.IsLoading())

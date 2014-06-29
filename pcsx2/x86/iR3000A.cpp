@@ -126,7 +126,7 @@ static void recEventTest()
 static void __fastcall StackFrameCheckFailed( int espORebp, int regval )
 {
 	pxFailDev( pxsFmt( L"(R3000A Recompiler Stackframe) Sanity check failed on %s\n\tCurrent=%d; Saved=%d",
-		(espORebp==0) ? L"ESP" : L"EBP", regval, (espORebp==0) ? s_store_esp : s_store_ebp )
+		(espORebp==0) ? "ESP" : "EBP", regval, (espORebp==0) ? s_store_esp : s_store_ebp )
 	);
 
 	// Note: The recompiler will attempt to recover ESP and EBP after returning from this function,
