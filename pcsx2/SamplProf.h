@@ -44,7 +44,7 @@ void ProfilerTerminateSource( const wxString& Name );
 #define ProfilerTerm() (void)0
 #define ProfilerSetEnabled 0&&
 #define ProfilerRegisterSource 0&&
-#define ProfilerTerminateSource 0&&
+#define ProfilerTerminateSource(dummy) (void)0
 
 #endif
 
